@@ -1,65 +1,108 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import ProfileImg from "@/components/ProfileImg"
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <main className="relative overflow-hidden pb-24 pt-32">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, var(--color-line) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <div className="relative flex flex-col items-center mx-auto max-w-6xl px-6">
+        <motion.div
+          animate={{ y: [0, -9, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ProfileImg src="/img/profile.jpg" alt="profile" size={180} />
+        </motion.div>
+
+        {/* <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-graphite"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" />
+          </span>
+          Available for new projects
+        </motion.div> */}
+
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-8 max-w-3xl font-display text-center text-3xl font-medium leading-[1.1] text-ink md:text-4xl"
+        >
+          Hi, I&apos;m Prajak Udomsup <br/>
+          a Full-Stack Developer from Thailand.
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-3 font-body text-xl text-graphite"
+        >
+          now I&apos;m still working in Frontend Developer role, but I have Backend experian
+        </motion.p>
+
+        {/* — */}
+
+        {/* <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact"
+            className="rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:bg-accent"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            Start a project
           </a>
+
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/resume"
+            className="rounded-full border border-line px-6 py-3 font-mono text-xs uppercase tracking-widest text-ink transition-colors hover:border-ink"
           >
-            Documentation
+            View resume
           </a>
-        </div>
-      </main>
-    </div>
+        </motion.div> */}
+
+        {/* <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-24 grid grid-cols-2 gap-8 border-t border-line pt-8 font-mono text-xs uppercase tracking-widest text-graphite md:grid-cols-4"
+        >
+          <div>
+            <p className="text-[10px] text-accent">Based in</p>
+            <p className="mt-1 text-ink">Your City</p>
+          </div>
+          <div>
+            <p className="text-[10px] text-accent">Focus</p>
+            <p className="mt-1 text-ink">Product Design</p>
+          </div>
+          <div>
+            <p className="text-[10px] text-accent">Experience</p>
+            <p className="mt-1 text-ink">X+ Years</p>
+          </div>
+          <div>
+            <p className="text-[10px] text-accent">Status</p>
+            <p className="mt-1 text-ink">Freelance</p>
+          </div>
+        </motion.div> */}
+      </div>
+    </main>
   );
 }
