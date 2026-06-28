@@ -35,7 +35,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-paper font-body text-ink antialiased">
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
       </body>
     </html>

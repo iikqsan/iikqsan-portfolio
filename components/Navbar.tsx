@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import GitHubStarsButton from '@/components/GitHubStarsButton'
 
 const NAV_LINKS = [
@@ -12,11 +12,39 @@ const NAV_LINKS = [
     { label: "Contact", href: "/contact" },
 ];
 
-export default function Navbar() {
+// เพิ่ม Type Interface รับค่า containerRef ส่งมาจากหน้าหลัก
+interface NavbarProps {
+    containerRef: React.RefObject<HTMLElement | null>;
+}
+
+export default function Navbar({ containerRef }: NavbarProps) {
     const [open, setOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
+
+    // ดักจับการ Scroll จากคอนเทนเนอร์หลักที่ส่งเข้ามา
+    const { scrollY } = useScroll({ container: containerRef });
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+
+        if (latest > previous && latest > 100) {
+            setHidden(true);
+            setOpen(false);
+        } else {
+            setHidden(false);
+        }
+    });
 
     return (
-        <header className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
+        <motion.header
+            variants={{
+                visible: { y: 0 },
+                hidden: { y: "-100%" },
+            }}
+            animate={hidden ? "hidden" : "visible"}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md"
+        >
             <nav className="mx-auto grid max-w-6xl grid-cols-3 items-center px-6 py-5">
                 {/* Left: logo */}
                 <div className="col-start-1 justify-self-start">
@@ -80,6 +108,6 @@ export default function Navbar() {
                     </motion.ul>
                 )}
             </AnimatePresence>
-        </header>
+        </motion.header>
     );
 }

@@ -75,10 +75,10 @@ export default function GitHubStarsButton({ repo }: GitHubStarsButtonProps) {
             <span className="flex items-center gap-1.5 px-3 py-1.5 ">
                 <GithubIcon size={16} />
             </span>
-            <span className="flex items-center gap-1 border-l border-line px-3 py-1.5 text-graphite bg-ink/5">
+            {/* <span className="flex items-center gap-1 border-l border-line px-3 py-1.5 text-graphite bg-ink/5"> */}
                 {/* {stars !== null ? formatStars(stars) : "—"} */}
-                {watchers !== null ? formatStars(watchers) : "—"}
-            </span>
+                {/* {watchers !== null ? formatStars(watchers) : "—"} */}
+            {/* </span> */}
         </a>
     );
 }
