@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import ThemeProvider from "@/components/ThemeProvider";
+import AppShell from "@/components/AppShell";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -20,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "iikqsan — Product Designer",
+  title: "Prajak Udomsup",
   description: "Portfolio of iikqsan, a product designer.",
 };
 
@@ -33,10 +34,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
       <body className="bg-paper font-body text-ink antialiased">
-        {/* <Navbar /> */}
-        {children}
+        <ThemeProvider>
+          <AppShell>
+            {children}
+          </AppShell>
+        </ThemeProvider>
       </body>
     </html>
   );

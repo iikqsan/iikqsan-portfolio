@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import GitHubStarsButton from '@/components/GitHubStarsButton'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const NAV_LINKS = [
     { label: "Home", href: "/" },
@@ -70,7 +71,8 @@ export default function Navbar({ containerRef }: NavbarProps) {
 
                 {/* Right: github badge + mobile menu */}
                 <div className="col-start-3 flex items-center justify-self-end gap-4">
-                    <GitHubStarsButton repo="iikqsan/iikqsan-portfolio" />
+                    <ThemeToggle />
+                    {/* <GitHubStarsButton repo="iikqsan/iikqsan-portfolio" /> */}
 
                     <button
                         onClick={() => setOpen(!open)}
