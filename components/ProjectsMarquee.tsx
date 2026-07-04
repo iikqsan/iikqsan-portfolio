@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
@@ -25,58 +25,22 @@ const PROJECTS = [
 
 // Placeholder entries until real certificate images are added.
 const CERTIFICATES = [
-    { label: "AWS Certified Developer", accent: "#FF9900" },
-    { label: "Google UX Design", accent: "#4285F4" },
-    { label: "Meta Frontend Developer", accent: "#0668E1" },
-    { label: "Professional Scrum Master I", accent: "#00A0DE" },
-    { label: "TOEIC 900+", accent: "#00C896" },
-    { label: "React Advanced Patterns", accent: "#61DAFB" },
-    // { label: "Google UX Design", src: "/img/certificates/google-ux.png" }, //public/img/certificates/
+    { label: "Postman API Fundamentals Student Expert", src: "/img/certificates/Postman-badge.png" },
 ];
 
 const SLIDE_INTERVAL = 5000;
 
 function MockScreen({ project }: { project: (typeof PROJECTS)[number] }) {
     return (
-        // <div className={`w-full h-full rounded-xl bg-gradient-to-br ${project.mockBg} border border-white/10 p-3 flex flex-col gap-2`}>
-        //     <div className="flex items-center gap-1.5">
-        //         <span className="h-2 w-2 rounded-full bg-red-500/70" />
-        //         <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-        //         <span className="h-2 w-2 rounded-full bg-green-500/70" />
-        //         <div className="ml-2 h-1.5 flex-1 rounded-full bg-white/10" />
-        //     </div>
-        //     <div className="flex flex-col gap-1.5 mt-1">
-        //         {project.mockLines.map((line, i) => (
-        //             <div key={i} className="flex items-center gap-2">
-        //                 <div
-        //                     className="h-1.5 rounded-full"
-        //                     style={{ width: `${55 + i * 10}%`, backgroundColor: project.accent, opacity: 0.3 + i * 0.15 }}
-        //                 />
-        //                 <span className="font-mono text-[9px] text-white/40 whitespace-nowrap hidden sm:inline">{line}</span>
-        //             </div>
-        //         ))}
-        //     </div>
-        //     <div className="mt-auto h-10 rounded-lg" style={{ background: `linear-gradient(135deg, ${project.accent}22, ${project.accent}08)` }}>
-        //         <svg className="w-full h-full" viewBox="0 0 200 40" preserveAspectRatio="none">
-        //             <polyline points="0,32 40,20 80,26 120,10 160,16 200,4" fill="none" stroke={project.accent} strokeWidth="1.5" strokeOpacity="0.6" />
-        //             <polygon points="0,32 40,20 80,26 120,10 160,16 200,4 200,40 0,40" fill={project.accent} fillOpacity="0.08" />
-        //         </svg>
-        //     </div>
-        // </div>
-
-        <div className="w-full h-full flex flex-row items-center gap-4 md:gap-12">
-            <div className="flex-1 min-w-0 flex flex-col gap-1.5 md:gap-3 text-left">
-                {/* label / title / description เดิม */}
-            </div>
-            <div className="w-28 h-28 md:w-110 md:h-auto shrink-0 rounded-2xl overflow-hidden border border-line">
-                <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={440}
-                    height={315}
-                    loading="lazy"
-                />
-            </div>
+        <div className="relative w-full h-full rounded-2xl overflow-hidden border border-line bg-ink/[0.02] dark:bg-paper/[0.03]">
+            <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(min-width: 768px) 420px, 112px"
+                className="object-cover"
+                loading="lazy"
+            />
         </div>
     );
 }
@@ -105,32 +69,51 @@ function ProjectSlide({ project }: { project: (typeof PROJECTS)[number] }) {
 function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
     return (
         <div className="w-32 h-20 md:w-48 md:h-28 shrink-0 mr-4 rounded-xl border border-dashed border-line bg-ink/[0.02] dark:bg-paper/[0.03] flex flex-col items-center justify-center gap-1.5 px-3">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={cert.accent} strokeWidth="1.5">
-                <circle cx="12" cy="8" r="5" />
-                <path d="M8.5 12.5 7 21l5-2.5 5 2.5-1.5-8.5" />
-            </svg>
-            <span className="font-mono text-[10px] text-graphite text-center leading-tight">
-                {cert.label}
-            </span>
-
-            {/* <img
+            <Image
                 src={cert.src}
                 alt={cert.label}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 loading="lazy"
-              /> */}
+            />
         </div>
     );
 }
 
 function CertificatesFooter() {
-    const doubled = [...CERTIFICATES, ...CERTIFICATES];
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [setCount, setSetCount] = useState(2);
+
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+
+        const recalculate = () => {
+            const singleSetWidth = track.scrollWidth / setCount;
+            if (singleSetWidth <= 0) return;
+            const needed = Math.ceil(window.innerWidth / singleSetWidth) + 1;
+            setSetCount((prev) => (needed > prev ? needed : prev));
+        };
+
+        recalculate();
+        window.addEventListener("resize", recalculate);
+        return () => window.removeEventListener("resize", recalculate);
+    }, [setCount]);
+
+    const sets = Array.from({ length: setCount * 2 });
+
     return (
         <div className="w-full shrink-0 overflow-hidden border-t border-line py-3 md:py-5 mt-2 md:mt-4">
-            <div className="flex w-max animate-marquee-left">
-                {doubled.map((cert, i) => (
-                    <CertificateCard key={i} cert={cert} />
-                ))}
+            <div
+                ref={trackRef}
+                className="flex w-max animate-marquee-left"
+                style={{ animationDuration: `${(setCount / 2) * 60}s` }}
+            >
+                {sets.map((_, setIndex) =>
+                    CERTIFICATES.map((cert, i) => (
+                        <CertificateCard key={`${setIndex}-${i}`} cert={cert} />
+                    ))
+                )}
             </div>
         </div>
     );
