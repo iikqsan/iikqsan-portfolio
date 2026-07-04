@@ -44,7 +44,7 @@ export default function Navbar({ containerRef }: NavbarProps) {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md"
+            className="relative z-50 border-b border-line bg-paper/80 backdrop-blur-md"
         >
             <nav className="mx-auto grid max-w-6xl grid-cols-3 items-center px-6 py-5">
                 {/* Left: logo */}
@@ -91,7 +91,7 @@ export default function Navbar({ containerRef }: NavbarProps) {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden border-t border-line bg-paper md:hidden"
+                        className="absolute left-0 right-0 top-full z-50 overflow-hidden border-t border-line bg-paper md:hidden"
                     >
                         {NAV_LINKS.map((link) => (
                             <li

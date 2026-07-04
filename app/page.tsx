@@ -9,18 +9,8 @@ import EmploymentTimeline from "@/components/EmploymentTimeline";
 export default function Home() {
   return (
     <>
-      {/* Background Dot Grid */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-40 z-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, var(--color-line) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-
       {/* SECTION 1: Hero / Profile */}
-      <section className="relative h-screen snap-start flex flex-col justify-center items-center mx-auto max-w-6xl px-6 z-10">
+      <section className="relative min-h-full flex flex-col justify-center items-center mx-auto max-w-6xl px-6 z-10">
         <motion.div
           animate={{ y: [0, -9, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -62,20 +52,20 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: Projects */}
-      <section className="relative h-screen snap-start flex flex-col justify-center z-10 overflow-hidden">
-        <div className="mb-10 px-6 max-w-6xl mx-auto w-full">
+      <section className="relative min-h-full flex flex-col z-10 overflow-hidden">
+        <div className="mt-8 mb-4 px-6 max-w-6xl mx-auto w-full md:mt-8 md:mb-4">
           <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">My Projects</h2>
         </div>
         <ProjectsMarquee />
       </section>
 
       {/* SECTION 3: Employment */}
-      <section className="relative h-screen snap-start flex flex-col justify-center z-10">
+      <section className="relative min-h-full flex flex-col justify-center z-10">
         <EmploymentTimeline />
       </section>
 
       {/* SECTION 4: Skills */}
-      <section className="relative h-screen snap-start flex flex-col justify-center z-10">
+      <section className="relative min-h-full flex flex-col justify-center z-10">
         <SkillsSection />
       </section>
     </>

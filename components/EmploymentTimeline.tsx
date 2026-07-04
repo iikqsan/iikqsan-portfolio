@@ -18,27 +18,26 @@ const EMPLOYMENT = [
         company: "DXC Technology",
         location: "Bangkok, Thailand",
         role: "Datacenter Operation (Printing Support)",
-        description:
-            "Technical support",
+        description: "Technical support",
         tags: ["SAP"],
         current: false,
-    }
+    },
 ];
 
 export default function EmploymentTimeline() {
     return (
         <div className="mx-auto w-full max-w-6xl px-6">
-            {/* Header */}
-            <div className="mb-12">
+            <div className="mb-10">
                 <h2 className="font-display text-4xl font-medium text-ink md:text-5xl">
                     Where I&apos;ve worked.
                 </h2>
             </div>
 
-            {/* Timeline */}
-            <div className="relative flex flex-col">
-                {/* vertical line */}
-                <div className="absolute left-[148px] top-0 h-full w-px bg-line md:left-[188px]" />
+            <div className="flex flex-col gap-8 md:gap-0">
+                {/* Desktop: vertical line */}
+                <div className="relative hidden md:block">
+                    <div className="absolute left-[188px] top-0 h-full w-px bg-line" />
+                </div>
 
                 {EMPLOYMENT.map((job, i) => (
                     <motion.div
@@ -47,41 +46,43 @@ export default function EmploymentTimeline() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-60px" }}
                         transition={{ duration: 0.45, delay: i * 0.1 }}
-                        className="grid grid-cols-[148px_1fr] gap-x-10 pb-10 last:pb-0 md:grid-cols-[188px_1fr]"
+                        className="flex flex-col gap-3 md:grid md:grid-cols-[188px_1fr] md:gap-x-10 md:pb-10 md:last:pb-0"
                     >
-                        {/* Left: period */}
-                        <div className="relative flex flex-col items-end gap-1 pt-0.5">
-                            <span className="font-body text-[13px] uppercase tracking-widest text-graphite">
-                                {job.period}
-                            </span>
-                            {job.current && (
-                                <span className="inline-flex items-center gap-1 font-mono text-[12px] uppercase tracking-widest text-green-600">
-                                    <span className="relative flex h-1.5 w-1.5">
-                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
-                                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-600" />
-                                    </span>
-                                    Now
+                        {/* Period + badges */}
+                        <div className="relative flex flex-row items-center gap-3 md:flex-col md:items-end md:gap-1 md:pt-0.5">
+                            <div className="flex items-center gap-2 md:flex-col md:items-end md:gap-1">
+                                <span className="font-body text-[13px] uppercase tracking-widest text-graphite">
+                                    {job.period}
                                 </span>
-                            )}
-                            {/* dot on the line */}
-                            <div className="absolute me-5 -right-[41px] top-2 h-3 w-3 rounded-full border-2 border-accent bg-paper md:-right-[51px]" />
+                                {job.current && (
+                                    <span className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-widest text-green-600">
+                                        <span className="relative flex h-1.5 w-1.5">
+                                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
+                                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-600" />
+                                        </span>
+                                        Now
+                                    </span>
+                                )}
+                            </div>
+                            {/* dot on timeline — desktop only */}
+                            <div className="absolute -right-[51px] top-2 hidden h-3 w-3 rounded-full border-2 border-accent bg-paper md:block" />
                         </div>
 
-                        {/* Right: content */}
+                        {/* Content */}
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                                <h3 className="font-display text-2xl font-medium text-ink">
+                                <h3 className="font-display text-xl font-medium text-ink md:text-2xl">
                                     {job.role}
                                 </h3>
-                                <span className="font-body text-md text-graphite">
+                                <span className="font-body text-sm text-graphite md:text-md">
                                     @ {job.company}
                                 </span>
-                                <span className="font-body text-sm text-graphite/60">
+                                <span className="font-body text-xs text-graphite/60 md:text-sm">
                                     {job.location}
                                 </span>
                             </div>
 
-                            <p className="font-body text-ms leading-relaxed text-graphite">
+                            <p className="font-body text-sm leading-relaxed text-graphite md:text-ms">
                                 {job.description}
                             </p>
 
