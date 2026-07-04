@@ -2,51 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 const PROJECTS = [
     {
-        label: "Full-Stack Web App",
-        title: "iikQsan Portfolio",
+        label: "Backend API",
+        title: "NRCA Web Application",
         description:
-            "Personal portfolio built with Next.js 16, Tailwind CSS v4, and Framer Motion. Features dark mode, snap-scroll, and animated sections.",
+            "Develop Login & Register API, SSO function with ThaID for NRCA Web Application",
         accent: "#3D5AFE",
-        mockBg: "from-[#3D5AFE]/20 to-[#0a0a0f]",
-        mockLines: ["navbar", "hero section", "projects", "skills"],
+        image: "/img/projects/NRCA_web.png"
     },
     {
-        label: "Backend Service",
-        title: "REST API Platform",
+        label: "Frontend",
+        title: "CM Square",
         description:
-            "Scalable RESTful API built with Node.js and Express. Includes JWT auth, rate limiting, and PostgreSQL integration.",
-        accent: "#00C896",
-        mockBg: "from-[#00C896]/20 to-[#0a0a0f]",
-        mockLines: ["GET /api/users", "POST /api/auth", "PUT /api/profile", "DELETE /api/session"],
+            "",
+        accent: "#0C2F53",
+        image: "/img/projects/cm_square.png"
     },
-    {
-        label: "Frontend Dashboard",
-        title: "Analytics Dashboard",
-        description:
-            "Data visualization dashboard with real-time charts, filterable tables, and exportable reports built with React and Recharts.",
-        accent: "#FF6B35",
-        mockBg: "from-[#FF6B35]/20 to-[#0a0a0f]",
-        mockLines: ["Sessions Today", "Avg Duration", "Bounce Rate", "Conversion"],
-    },
-    {
-        label: "Mobile-First App",
-        title: "Task Manager",
-        description:
-            "Responsive task management app with drag-and-drop boards, priority tagging, and team collaboration features.",
-        accent: "#A855F7",
-        mockBg: "from-[#A855F7]/20 to-[#0a0a0f]",
-        mockLines: ["To Do (4)", "In Progress (2)", "Review (1)", "Done (8)"],
-    },
-    // {
-    //       label: "Full-Stack Web App",
-    //       title: "iikQsan Portfolio",
-    //       description: "...",
-    //       image: "/img/projects/iikqsan-portfolio.png",
-    //   },
-      // ... (ตัด accent, mockBg, mockLines ออกได้ถ้าไม่ใช้ MockScreen แล้ว)
 ];
 
 // Placeholder entries until real certificate images are added.
@@ -64,46 +38,46 @@ const SLIDE_INTERVAL = 5000;
 
 function MockScreen({ project }: { project: (typeof PROJECTS)[number] }) {
     return (
-        <div className={`w-full h-full rounded-xl bg-gradient-to-br ${project.mockBg} border border-white/10 p-3 flex flex-col gap-2`}>
-            <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-red-500/70" />
-                <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-                <span className="h-2 w-2 rounded-full bg-green-500/70" />
-                <div className="ml-2 h-1.5 flex-1 rounded-full bg-white/10" />
+        // <div className={`w-full h-full rounded-xl bg-gradient-to-br ${project.mockBg} border border-white/10 p-3 flex flex-col gap-2`}>
+        //     <div className="flex items-center gap-1.5">
+        //         <span className="h-2 w-2 rounded-full bg-red-500/70" />
+        //         <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
+        //         <span className="h-2 w-2 rounded-full bg-green-500/70" />
+        //         <div className="ml-2 h-1.5 flex-1 rounded-full bg-white/10" />
+        //     </div>
+        //     <div className="flex flex-col gap-1.5 mt-1">
+        //         {project.mockLines.map((line, i) => (
+        //             <div key={i} className="flex items-center gap-2">
+        //                 <div
+        //                     className="h-1.5 rounded-full"
+        //                     style={{ width: `${55 + i * 10}%`, backgroundColor: project.accent, opacity: 0.3 + i * 0.15 }}
+        //                 />
+        //                 <span className="font-mono text-[9px] text-white/40 whitespace-nowrap hidden sm:inline">{line}</span>
+        //             </div>
+        //         ))}
+        //     </div>
+        //     <div className="mt-auto h-10 rounded-lg" style={{ background: `linear-gradient(135deg, ${project.accent}22, ${project.accent}08)` }}>
+        //         <svg className="w-full h-full" viewBox="0 0 200 40" preserveAspectRatio="none">
+        //             <polyline points="0,32 40,20 80,26 120,10 160,16 200,4" fill="none" stroke={project.accent} strokeWidth="1.5" strokeOpacity="0.6" />
+        //             <polygon points="0,32 40,20 80,26 120,10 160,16 200,4 200,40 0,40" fill={project.accent} fillOpacity="0.08" />
+        //         </svg>
+        //     </div>
+        // </div>
+
+        <div className="w-full h-full flex flex-row items-center gap-4 md:gap-12">
+            <div className="flex-1 min-w-0 flex flex-col gap-1.5 md:gap-3 text-left">
+                {/* label / title / description เดิม */}
             </div>
-            <div className="flex flex-col gap-1.5 mt-1">
-                {project.mockLines.map((line, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                        <div
-                            className="h-1.5 rounded-full"
-                            style={{ width: `${55 + i * 10}%`, backgroundColor: project.accent, opacity: 0.3 + i * 0.15 }}
-                        />
-                        <span className="font-mono text-[9px] text-white/40 whitespace-nowrap hidden sm:inline">{line}</span>
-                    </div>
-                ))}
-            </div>
-            <div className="mt-auto h-10 rounded-lg" style={{ background: `linear-gradient(135deg, ${project.accent}22, ${project.accent}08)` }}>
-                <svg className="w-full h-full" viewBox="0 0 200 40" preserveAspectRatio="none">
-                    <polyline points="0,32 40,20 80,26 120,10 160,16 200,4" fill="none" stroke={project.accent} strokeWidth="1.5" strokeOpacity="0.6" />
-                    <polygon points="0,32 40,20 80,26 120,10 160,16 200,4 200,40 0,40" fill={project.accent} fillOpacity="0.08" />
-                </svg>
+            <div className="w-28 h-28 md:w-110 md:h-auto shrink-0 rounded-2xl overflow-hidden border border-line">
+                <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={440}
+                    height={315}
+                    loading="lazy"
+                />
             </div>
         </div>
-
-//         <div className="w-full h-full flex flex-row items-center gap-4 md:gap-12">
-//               <div className="flex-1 min-w-0 flex flex-col gap-1.5 md:gap-3 text-left">
-//                   {/* label / title / description เดิม */}
-//               </div>
-//               <div className="w-28 h-28 md:w-[420px] md:h-auto md:aspect-[4/3] shrink-0 rounded-xl overflow-hidden border
-//   border-line">
-//                   <img
-//                       src={project.image}
-//                       alt={project.title}
-//                       className="w-full h-full object-cover"
-//                       loading="lazy"
-//                   />
-//               </div>
-//           </div>
     );
 }
 
@@ -177,10 +151,15 @@ export default function ProjectsMarquee() {
     return (
         <div className="flex-1 min-h-0 flex flex-col">
             <div
-                className="flex-1 min-h-0 flex flex-col items-center justify-center gap-4 px-6 pt-2 md:pt-4"
+                className="flex-1 min-h-0 flex flex-col items-center justify-start gap-4 px-6 pt-2 md:pt-4"
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
             >
+                <div className="mt-10 mb-28">
+                    <h2 className="font-display text-4xl font-medium text-ink md:text-5xl">
+                        My Projects
+                    </h2>
+                </div>
                 <div className="relative w-full max-w-5xl min-h-[130px] md:min-h-[300px]">
                     <AnimatePresence mode="wait">
                         <motion.div

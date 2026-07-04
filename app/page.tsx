@@ -15,7 +15,7 @@ export default function Home() {
           animate={{ y: [0, -9, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ProfileImg src="/img/profile.jpg" alt="profile" size={180} />
+          <ProfileImg src="/img/profile/profile.jpg" alt="profile" size={222} />
         </motion.div>
 
         <motion.h1
@@ -53,9 +53,9 @@ export default function Home() {
 
       {/* SECTION 2: Projects */}
       <section className="relative min-h-full flex flex-col z-10 overflow-hidden">
-        <div className="mt-8 mb-4 px-6 max-w-6xl mx-auto w-full md:mt-8 md:mb-4">
+        {/* <div className="mt-8 mb-4 px-6 max-w-6xl mx-auto w-full md:mt-8 md:mb-4">
           <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">My Projects</h2>
-        </div>
+        </div> */}
         <ProjectsMarquee />
       </section>
 

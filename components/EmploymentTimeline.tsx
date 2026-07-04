@@ -27,7 +27,7 @@ const EMPLOYMENT = [
 export default function EmploymentTimeline() {
     return (
         <div className="mx-auto w-full max-w-6xl px-6">
-            <div className="mb-10">
+            <div className="mb-18">
                 <h2 className="font-display text-4xl font-medium text-ink md:text-5xl">
                     Where I&apos;ve worked.
                 </h2>
@@ -69,7 +69,7 @@ export default function EmploymentTimeline() {
                         </div>
 
                         {/* Content */}
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 ms-5">
                             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                                 <h3 className="font-display text-xl font-medium text-ink md:text-2xl">
                                     {job.role}

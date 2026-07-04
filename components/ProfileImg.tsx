@@ -18,6 +18,7 @@ export default function ProfileImg({ src, alt, size = 160 }: AvatarProps) {
                 width={size}
                 height={size}
                 className="h-full w-full object-cover"
+                priority
             />
         </div>
     );

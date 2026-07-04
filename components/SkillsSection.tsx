@@ -38,7 +38,6 @@ const SKILL_GROUPS = [
         skills: [
             { name: "PowerShell",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powershell/powershell-original.svg" },
             { name: "Docker",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
-            { name: "Azure DevOps", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg" },
             { name: "Git",          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
             { name: "PostMan",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
             { name: "RabbitMQ",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg" },
@@ -48,8 +47,9 @@ const SKILL_GROUPS = [
 
 export default function SkillsSection() {
     return (
+        
         <div className="mx-auto w-full max-w-6xl px-6">
-            <div className="mb-2">
+            <div className="mb-18">
                 <h2 className="font-display text-4xl font-medium text-ink md:text-5xl">
                     Tools I work with.
                 </h2>
