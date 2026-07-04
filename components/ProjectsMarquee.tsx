@@ -68,12 +68,13 @@ function ProjectSlide({ project }: { project: (typeof PROJECTS)[number] }) {
 
 function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
     return (
-        <div className="w-32 h-20 md:w-48 md:h-28 shrink-0 mr-4 rounded-xl border border-dashed border-line bg-ink/[0.02] dark:bg-paper/[0.03] flex flex-col items-center justify-center gap-1.5 px-3">
+        <div className="relative w-32 h-20 md:w-48 md:h-28 shrink-0 mr-4 rounded-xl border border-dashed border-line bg-ink/[0.02] dark:bg-paper/[0.03] p-3">
             <Image
                 src={cert.src}
                 alt={cert.label}
                 fill
-                className="object-cover"
+                sizes="(min-width: 768px) 192px, 128px"
+                className="object-contain"
                 loading="lazy"
             />
         </div>
@@ -107,7 +108,7 @@ function CertificatesFooter() {
             <div
                 ref={trackRef}
                 className="flex w-max animate-marquee-left"
-                style={{ animationDuration: `${(setCount / 2) * 60}s` }}
+                style={{ animationDuration: `${(setCount / 2) * 30}s` }}
             >
                 {sets.map((_, setIndex) =>
                     CERTIFICATES.map((cert, i) => (
