@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ProfileImg from "@/components/ProfileImg";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsMarquee from "@/components/ProjectsMarquee";
+import CertificatesMarquee from "@/components/CertificatesMarquee";
 import EmploymentTimeline from "@/components/EmploymentTimeline";
 
 export default function Home() {
@@ -53,18 +54,20 @@ export default function Home() {
 
       {/* SECTION 2: Projects */}
       <section className="relative min-h-full flex flex-col z-10 overflow-hidden">
-        {/* <div className="mt-8 mb-4 px-6 max-w-6xl mx-auto w-full md:mt-8 md:mb-4">
-          <h2 className="font-display text-3xl font-medium text-ink md:text-4xl">My Projects</h2>
-        </div> */}
         <ProjectsMarquee />
       </section>
 
-      {/* SECTION 3: Employment */}
+      {/* SECTION 3: Certificates */}
+      <section className="relative min-h-full flex flex-col justify-center z-10 overflow-hidden">
+        <CertificatesMarquee />
+      </section>
+
+      {/* SECTION 4: Employment */}
       <section className="relative min-h-full flex flex-col justify-center z-10">
         <EmploymentTimeline />
       </section>
 
-      {/* SECTION 4: Skills */}
+      {/* SECTION 5: Skills */}
       <section className="relative min-h-full flex flex-col justify-center z-10">
         <SkillsSection />
       </section>
