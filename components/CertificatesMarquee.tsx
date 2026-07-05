@@ -7,15 +7,44 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Placeholder entries until real certificate images are added.
 const CERTIFICATES = [
-    { label: "Postman API Fundamentals Student Expert", src: "/img/certificates/Postman-badge.png" },
-    { label: "AWS", src: "/img/certificates/mockupcert.jpg" },
+    // { label: "AWS", src: "/img/certificates/mockupcert.jpg" },
 ];
 
-const PREVIEW_MAX_WIDTH = 560;
-const PREVIEW_CURSOR_OFFSET = 20;
-const PREVIEW_EDGE_MARGIN = 340;
+// Placeholder entries until real badge images are added.
+const BADGES = [
+    { label: "Postman API Fundamentals Student Expert", src: "/img/certificates/Postman-badge.png" },
+];
 
-function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
+// Independent preview-popup config per marquee — tweak either without affecting the other.
+const CERT_PREVIEW_CONFIG = {
+    maxWidth: 560,
+    cursorOffset: 20,
+    edgeMargin: 340,
+};
+
+const BADGE_PREVIEW_CONFIG = {
+    maxWidth: 320,
+    cursorOffset: 16,
+    edgeMargin: 260,
+};
+
+const PREVIEW_CONFIG = {
+    default: CERT_PREVIEW_CONFIG,
+    badge: BADGE_PREVIEW_CONFIG,
+};
+
+// Independent scroll-speed base (seconds per 2 sets) per marquee — tweak either without affecting the other.
+const CERT_DURATION_BASE = 30;
+const BADGE_DURATION_BASE = 15;
+
+const DURATION_CONFIG = {
+    default: CERT_DURATION_BASE,
+    badge: BADGE_DURATION_BASE,
+};
+
+type CertItem = { label: string; src: string };
+
+function CertificateCard({ cert, size = "default" }: { cert: CertItem; size?: "default" | "badge" }) {
     const [hovered, setHovered] = useState(false);
     const [pos, setPos] = useState({ x: 0, y: 0 });
     const [mounted, setMounted] = useState(false);
@@ -26,18 +55,26 @@ function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
         setPos({ x: e.clientX, y: e.clientY });
     };
 
-    const previewWidth = mounted ? Math.min(PREVIEW_MAX_WIDTH, window.innerWidth - PREVIEW_EDGE_MARGIN * 2) : PREVIEW_MAX_WIDTH;
+    const { maxWidth: previewMaxWidth, cursorOffset: previewCursorOffset, edgeMargin: previewEdgeMargin } = PREVIEW_CONFIG[size];
+
+    const previewWidth = mounted ? Math.min(previewMaxWidth, window.innerWidth - previewEdgeMargin * 2) : previewMaxWidth;
     const previewHeight = previewWidth * 0.75;
     const left = mounted
-        ? Math.min(pos.x + PREVIEW_CURSOR_OFFSET, window.innerWidth - previewWidth - PREVIEW_EDGE_MARGIN)
+        ? Math.min(pos.x + previewCursorOffset, window.innerWidth - previewWidth - previewEdgeMargin)
         : 0;
     const top = mounted
-        ? Math.min(pos.y + PREVIEW_CURSOR_OFFSET, window.innerHeight - previewHeight - PREVIEW_EDGE_MARGIN)
+        ? Math.min(pos.y + previewCursorOffset, window.innerHeight - previewHeight - previewEdgeMargin)
         : 0;
+
+    const isBadge = size === "badge";
 
     return (
         <div
-            className="relative w-48 h-32 md:w-72 md:h-48 lg:w-80 lg:h-52 xl:w-96 xl:h-60 shrink-0 mr-6 md:mr-8 overflow-hidden rounded-xl border border-dashed border-line bg-ink/[0.02] dark:bg-paper/[0.03]"
+            className={
+                isBadge
+                    ? "relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 shrink-0 mr-4 md:mr-6 overflow-hidden rounded-xl border border-dashed border-line bg-ink/[0.02] p-3 dark:bg-paper/[0.03]"
+                    : "relative w-48 h-32 md:w-72 md:h-48 lg:w-80 lg:h-52 xl:w-96 xl:h-60 shrink-0 mr-6 md:mr-8 overflow-hidden rounded-xl border border-dashed border-line bg-ink/[0.02] dark:bg-paper/[0.03]"
+            }
             onMouseEnter={(e) => { trackCursor(e); setHovered(true); }}
             onMouseMove={trackCursor}
             onMouseLeave={() => setHovered(false)}
@@ -46,8 +83,12 @@ function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
                 src={cert.src}
                 alt={cert.label}
                 fill
-                sizes="(min-width: 1280px) 384px, (min-width: 1024px) 320px, (min-width: 768px) 288px, 192px"
-                className="object-cover"
+                sizes={
+                    isBadge
+                        ? "(min-width: 1024px) 112px, (min-width: 768px) 96px, 80px"
+                        : "(min-width: 1280px) 384px, (min-width: 1024px) 320px, (min-width: 768px) 288px, 192px"
+                }
+                className={isBadge ? "object-contain" : "object-cover"}
                 loading="lazy"
             />
 
@@ -68,7 +109,7 @@ function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
                                     src={cert.src}
                                     alt={cert.label}
                                     fill
-                                    sizes={`${PREVIEW_MAX_WIDTH}px`}
+                                    sizes={`${previewMaxWidth}px`}
                                     className="object-contain"
                                 />
                             </div>
@@ -81,7 +122,15 @@ function CertificateCard({ cert }: { cert: (typeof CERTIFICATES)[number] }) {
     );
 }
 
-export default function CertificatesMarquee() {
+function MarqueeRow({
+    items,
+    size = "default",
+    direction = "left",
+}: {
+    items: CertItem[];
+    size?: "default" | "badge";
+    direction?: "left" | "right";
+}) {
     const trackRef = useRef<HTMLDivElement>(null);
     const [setCount, setSetCount] = useState(2);
     const [paused, setPaused] = useState(false);
@@ -91,9 +140,9 @@ export default function CertificatesMarquee() {
         if (!track) return;
 
         const recalculate = () => {
-            const singleSetWidth = track.scrollWidth / setCount;
-            if (singleSetWidth <= 0) return;
-            const needed = Math.ceil(window.innerWidth / singleSetWidth) + 1;
+            const groupWidth = track.scrollWidth / (setCount * 2);
+            if (groupWidth <= 0) return;
+            const needed = Math.ceil(window.innerWidth / groupWidth) + 1;
             setSetCount((prev) => (needed > prev ? needed : prev));
         };
 
@@ -105,32 +154,40 @@ export default function CertificatesMarquee() {
     const sets = Array.from({ length: setCount * 2 });
 
     return (
+        <div
+            className="w-full overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+        >
+            <div
+                ref={trackRef}
+                className={direction === "left" ? "flex w-max animate-marquee-left" : "flex w-max animate-marquee-right"}
+                style={{
+                    animationDuration: `${(setCount / 2) * DURATION_CONFIG[size]}s`,
+                    animationPlayState: paused ? "paused" : "running",
+                }}
+            >
+                {sets.map((_, setIndex) =>
+                    items.map((cert, i) => (
+                        <CertificateCard key={`${setIndex}-${i}`} cert={cert} size={size} />
+                    ))
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default function CertificatesMarquee() {
+    return (
         <div className="w-full flex flex-col items-center">
             <div className="mb-12 px-6 md:mb-16">
                 <h2 className="font-display text-4xl font-medium text-ink text-center md:text-5xl">
                     Certificates
                 </h2>
             </div>
-            <div
-                className="w-full overflow-hidden"
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
-            >
-                <div
-                    ref={trackRef}
-                    className="flex w-max animate-marquee-left"
-                    style={{
-                        animationDuration: `${(setCount / 2) * 30}s`,
-                        animationPlayState: paused ? "paused" : "running",
-                    }}
-                >
-                    {sets.map((_, setIndex) =>
-                        CERTIFICATES.map((cert, i) => (
-                            <CertificateCard key={`${setIndex}-${i}`} cert={cert} />
-                        ))
-                    )}
-                </div>
-            </div>
+            <MarqueeRow items={CERTIFICATES} size="default" direction="left" />
+            <div className="h-6 md:h-8" />
+            <MarqueeRow items={BADGES} size="badge" direction="right" />
         </div>
     );
 }

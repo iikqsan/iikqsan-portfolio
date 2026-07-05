@@ -58,9 +58,9 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: Certificates */}
-      <section className="relative min-h-full flex flex-col justify-center z-10 overflow-hidden">
+      {/* <section className="relative min-h-full flex flex-col justify-center z-10 overflow-hidden">
         <CertificatesMarquee />
-      </section>
+      </section> */}
 
       {/* SECTION 4: Employment */}
       <section className="relative min-h-full flex flex-col justify-center z-10">
