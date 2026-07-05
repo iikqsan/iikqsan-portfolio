@@ -1,4 +1,7 @@
+"use client";
+
 import ContactForm from "@/components/ContactForm";
+import { motion } from "framer-motion";
 
 // ใส่ LinkedIn profile URL ของคุณตรงนี้
 const LINKEDIN_URL = "https://www.linkedin.com/in/prajak-udomsup";
@@ -57,6 +60,18 @@ export default function ContactPage() {
                 <p className="mt-3 font-body text-lg text-graphite">
                     Have a project in mind or just want to say hi? Feel free to reach out.
                 </p>
+                <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-8 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-graphite"
+                >
+                    <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" />
+                    </span>
+                    <span className="font-body">Available for freelance project</span>
+                </motion.div>
             </div>
 
             <div className="grid gap-12 md:grid-cols-[1fr_2fr]">

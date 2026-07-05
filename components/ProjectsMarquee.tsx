@@ -9,7 +9,7 @@ const PROJECTS = [
         label: "Backend API",
         title: "NRCA Web Application",
         description:
-            "Develop Login & Register API, SSO function with ThaID for NRCA Web Application",
+            "Develop Login & Register API, SSO function with ThaID for this website",
         accent: "#3D5AFE",
         image: "/img/projects/NRCA_web.png"
     },
@@ -17,9 +17,49 @@ const PROJECTS = [
         label: "Frontend",
         title: "CM Square",
         description:
-            "",
+            "Re-design and Develop new UI using new stack",
         accent: "#0C2F53",
         image: "/img/projects/cm_square.png"
+    },
+    {
+        label: "Full-Stack",
+        title: "OTOD API Portal",
+        description:
+            "Develop Backend API and Frontend UI for Provider testing Durian Project API",
+        accent: "#ffc107",
+        image: "/img/projects/otod_api_portal.png"
+    },
+    {
+        label: "Frontend",
+        title: "OTOD Dashboard",
+        description:
+            "Develop Frontend UI Dashboard for Provider Durian Project checking farmer stat",
+        accent: "#fff200",
+        image: "/img/projects/otod_dashboard.png"
+    },
+    {
+        label: "Backend API",
+        title: "EdubroadCast",
+        description:
+            "Develop Backend API for this website",
+        accent: "#3840e4",
+        image: "/img/projects/edubroadcast.png"
+    },
+    {
+        label: "Full-Stack",
+        title: "OpenAPI Sandbox",
+        description:
+            "Develop Backend API and Frontend UI for Business partner try to connect they application to my application",
+        accent: "#1976d2",
+        image: "/img/projects/open_api_sandbox.png"
+    },
+    {
+        label: "Backend API",
+        title: "Tatip AI Camera",
+        description:
+            "Develop Backend API for this project",
+        accent: "#181818",
+        image: "/img/projects/tatip_ai_camera.png"
     },
 ];
 
