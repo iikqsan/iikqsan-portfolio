@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Placeholder entries until real certificate images are added.
 const CERTIFICATES = [
-    // { label: "AWS", src: "/img/certificates/mockupcert.jpg" },
+    { label: "AWS", src: "/img/certificates/mockupcert.jpg" },
 ];
 
 // Placeholder entries until real badge images are added.
