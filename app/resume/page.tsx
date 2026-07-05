@@ -1,7 +1,7 @@
 import { Download } from "lucide-react";
 
 // วาง Google Drive direct-download link ตรงนี้
-const RESUME_URL = "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID";
+const RESUME_URL = "https://drive.usercontent.google.com/uc?id=11CoAk2pgZii7FJBuP_g8bn7w5L1QcJH3&authuser=0&export=download";
 
 export default function ResumePage() {
     return (
