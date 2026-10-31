@@ -2,6 +2,7 @@
 
 import ContactForm from "@/components/ContactForm";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // ใส่ LinkedIn profile URL ของคุณตรงนี้
 const LINKEDIN_URL = "https://www.linkedin.com/in/prajak-udomsup";
@@ -50,15 +51,17 @@ const CHANNELS = [
 
 
 export default function ContactPage() {
+    const { t } = useLanguage();
+
     return (
         <div className="mx-auto w-full max-w-4xl px-6 py-20">
             {/* Header */}
             <div className="mb-12">
                 <h1 className="mt-5 font-display text-4xl font-medium text-ink md:text-5xl">
-                    Contact
+                    {t.contact.heading}
                 </h1>
                 <p className="mt-3 font-body text-lg text-graphite">
-                    Have a project in mind or just want to say hi? Feel free to reach out.
+                    {t.contact.subtitle}
                 </p>
                 <motion.div
                     initial={{ opacity: 0, y: 8 }}
@@ -70,7 +73,7 @@ export default function ContactPage() {
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" />
                     </span>
-                    <span className="font-body">Available for freelance project</span>
+                    <span className="font-body">{t.contact.available}</span>
                 </motion.div>
             </div>
 
@@ -78,7 +81,7 @@ export default function ContactPage() {
                 {/* Left: contact channels */}
                 <div className="flex flex-col gap-4">
                     <p className="font-body text-xs uppercase tracking-widest text-graphite">
-                        Find me on
+                        {t.contact.findMe}
                     </p>
                     {CHANNELS.map((ch) => (
                         <a
@@ -102,7 +105,7 @@ export default function ContactPage() {
                 {/* Right: email form */}
                 <div className="flex flex-col gap-4">
                     <p className="font-body text-xs uppercase tracking-widest text-graphite">
-                        Send a message
+                        {t.contact.sendMessage}
                     </p>
                     <ContactForm />
                 </div>

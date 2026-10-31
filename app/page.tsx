@@ -6,8 +6,11 @@ import SkillsSection from "@/components/SkillsSection";
 import ProjectsMarquee from "@/components/ProjectsMarquee";
 import CertificatesMarquee from "@/components/CertificatesMarquee";
 import EmploymentTimeline from "@/components/EmploymentTimeline";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <>
       {/* SECTION 1: Hero / Profile */}
@@ -25,8 +28,8 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8 max-w-3xl font-display text-center text-3xl font-medium leading-[1.1] text-ink md:text-4xl"
         >
-          Hi, I&apos;m Prajak Udomsup <br />
-          a Full-Stack Developer from Thailand.
+          {t.home.greeting} <br />
+          {t.home.role}
         </motion.h1>
 
         <motion.p
@@ -35,7 +38,7 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-3 font-body text-xl text-graphite text-center"
         >
-          now I&apos;m still working in Frontend Developer role, but I have Backend experience
+          {t.home.subtitle}
         </motion.p>
 
         {/* <motion.div

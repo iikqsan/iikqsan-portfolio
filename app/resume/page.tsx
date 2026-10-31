@@ -1,9 +1,14 @@
+"use client";
+
 import { Download } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // วาง Google Drive direct-download link ตรงนี้
 const RESUME_URL = "https://drive.usercontent.google.com/uc?id=11CoAk2pgZii7FJBuP_g8bn7w5L1QcJH3&authuser=0&export=download";
 
 export default function ResumePage() {
+    const { t } = useLanguage();
+
     return (
         <div className="flex h-full flex-col items-center justify-center gap-8 px-6 text-center">
             <div className="flex flex-col items-center gap-3">
@@ -11,7 +16,7 @@ export default function ResumePage() {
                     My Resume
                 </p> */}
                 <h1 className="font-display text-4xl font-medium text-ink md:text-5xl">
-                    My Resume
+                    {t.resume.heading}
                 </h1>
                 {/* <p className="font-body text-lg text-graphite">
                     Full-Stack Developer
@@ -27,11 +32,11 @@ export default function ResumePage() {
                     size={16}
                     className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0"
                 />
-                Download
+                {t.resume.download}
             </a>
 
             <p className="font-body text-xs text-graphite/50">
-                PDF · Updated 2024
+                {t.resume.meta}
             </p>
         </div>
     );

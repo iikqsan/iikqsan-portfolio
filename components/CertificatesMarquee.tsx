@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // Placeholder entries until real certificate images are added.
 const CERTIFICATES = [
@@ -178,11 +179,13 @@ function MarqueeRow({
 }
 
 export default function CertificatesMarquee() {
+    const { t } = useLanguage();
+
     return (
         <div className="w-full flex flex-col items-center">
             <div className="mb-12 px-6 md:mb-16">
                 <h2 className="font-display text-4xl font-medium text-ink text-center md:text-5xl">
-                    Certificates
+                    {t.certificates.heading}
                 </h2>
             </div>
             <MarqueeRow items={CERTIFICATES} size="default" direction="left" />

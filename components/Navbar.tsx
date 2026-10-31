@@ -6,12 +6,14 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import GitHubStarsButton from '@/components/GitHubStarsButton'
 import ThemeToggle from '@/components/ThemeToggle'
+import LanguageToggle from '@/components/LanguageToggle'
+import { useLanguage } from '@/components/LanguageProvider'
 
 const NAV_LINKS = [
-    { label: "Home", href: "/" },
-    { label: "Resume", href: "/resume" },
-    { label: "Contact", href: "/contact" },
-];
+    { key: "home", href: "/" },
+    { key: "resume", href: "/resume" },
+    { key: "contact", href: "/contact" },
+] as const;
 
 // เพิ่ม Type Interface รับค่า containerRef ส่งมาจากหน้าหลัก
 interface NavbarProps {
@@ -19,6 +21,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ containerRef }: NavbarProps) {
+    const { t } = useLanguage();
     const [open, setOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
 
@@ -50,7 +53,7 @@ export default function Navbar({ containerRef }: NavbarProps) {
                 {/* Left: logo */}
                 <div className="col-start-1 justify-self-start">
                     <Link href="/" className="font-mono text-xl tracking-tight text-ink">
-                        iikQsan<span className="text-accent">.</span>
+                        iikQsan<span className="text-accent">.dev</span>
                     </Link>
                 </div>
 
@@ -62,7 +65,7 @@ export default function Navbar({ containerRef }: NavbarProps) {
                                 href={link.href}
                                 className="group relative font-mono text-md uppercase tracking-widest text-graphite transition-colors hover:text-ink"
                             >
-                                {link.label}
+                                {t.nav[link.key]}
                                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
                             </Link>
                         </li>
@@ -71,13 +74,14 @@ export default function Navbar({ containerRef }: NavbarProps) {
 
                 {/* Right: github badge + mobile menu */}
                 <div className="col-start-3 flex items-center justify-self-end gap-4">
+                    <LanguageToggle />
                     <ThemeToggle />
                     {/* <GitHubStarsButton repo="iikqsan/iikqsan-portfolio" /> */}
 
                     <button
                         onClick={() => setOpen(!open)}
                         className="text-ink md:hidden"
-                        aria-label="Toggle menu"
+                        aria-label={t.nav.toggleMenu}
                     >
                         {open ? <X size={22} /> : <Menu size={22} />}
                     </button>
@@ -103,7 +107,7 @@ export default function Navbar({ containerRef }: NavbarProps) {
                                     onClick={() => setOpen(false)}
                                     className="block px-6 py-4 font-mono text-sm uppercase tracking-widest text-ink"
                                 >
-                                    {link.label}
+                                    {t.nav[link.key]}
                                 </Link>
                             </li>
                         ))}

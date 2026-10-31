@@ -1,35 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
+import type { Localized } from "@/lib/i18n";
 
-const EMPLOYMENT = [
+const EMPLOYMENT: {
+    period: Localized;
+    company: string;
+    location: Localized;
+    role: string;
+    description: Localized;
+    tags: string[];
+    current: boolean;
+}[] = [
     {
-        period: "2024 — Present",
+        period: { en: "2024 — Present", th: "2024 — ปัจจุบัน" },
         company: "Articulus Co.,Ltd.",
-        location: "Bangkok, Thailand",
+        location: { en: "Bangkok, Thailand", th: "กรุงเทพฯ, ประเทศไทย" },
         role: "Frontend Developer",
-        description:
-            "Developed and maintained responsive web applications using React and Next.js. Collaborated closely with design and backend teams to deliver features on schedule.",
+        description: {
+            en: "Developed and maintained responsive web applications using React and Next.js. Collaborated closely with design and backend teams to deliver features on schedule.",
+            th: "พัฒนาและดูแลเว็บแอปพลิเคชันแบบ Responsive ด้วย React และ Next.js ทำงานร่วมกับทีมออกแบบและทีม Backend อย่างใกล้ชิดเพื่อส่งมอบฟีเจอร์ได้ตามกำหนด",
+        },
         tags: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS"],
         current: true,
     },
     {
-        period: "2017 — 2024",
+        period: { en: "2017 — 2024", th: "2017 — 2024" },
         company: "DXC Technology",
-        location: "Bangkok, Thailand",
+        location: { en: "Bangkok, Thailand", th: "กรุงเทพฯ, ประเทศไทย" },
         role: "Datacenter Operation (Printing Support)",
-        description: "Technical support",
+        description: { en: "Technical support", th: "ซัพพอร์ตด้านเทคนิค" },
         tags: ["SAP"],
         current: false,
     },
 ];
 
 export default function EmploymentTimeline() {
+    const { lang, t } = useLanguage();
+
     return (
         <div className="mx-auto w-full max-w-6xl px-6">
             <div className="mb-18">
                 <h2 className="font-display text-4xl font-medium text-ink md:text-5xl">
-                    Where I&apos;ve worked.
+                    {t.employment.heading}
                 </h2>
             </div>
 
@@ -52,7 +66,7 @@ export default function EmploymentTimeline() {
                         <div className="relative flex flex-row items-center gap-3 md:flex-col md:items-end md:gap-1 md:pt-0.5">
                             <div className="flex items-center gap-2 md:flex-col md:items-end md:gap-1">
                                 <span className="font-body text-[13px] uppercase tracking-widest text-graphite">
-                                    {job.period}
+                                    {job.period[lang]}
                                 </span>
                                 {job.current && (
                                     <span className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-widest text-green-600">
@@ -60,7 +74,7 @@ export default function EmploymentTimeline() {
                                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
                                             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-600" />
                                         </span>
-                                        Now
+                                        {t.employment.now}
                                     </span>
                                 )}
                             </div>
@@ -78,12 +92,12 @@ export default function EmploymentTimeline() {
                                     @ {job.company}
                                 </span>
                                 <span className="font-body text-xs text-graphite/60 md:text-sm">
-                                    {job.location}
+                                    {job.location[lang]}
                                 </span>
                             </div>
 
                             <p className="font-body text-sm leading-relaxed text-graphite md:text-ms">
-                                {job.description}
+                                {job.description[lang]}
                             </p>
 
                             <div className="mt-1 flex flex-wrap gap-2">

@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 type FormValues = {
     email: string;
@@ -13,6 +14,7 @@ type FormValues = {
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
+    const { t } = useLanguage();
     const [status, setStatus] = useState<Status>("idle");
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -36,14 +38,14 @@ export default function ContactForm() {
 
             if (!res.ok) {
                 const body = await res.json();
-                throw new Error(body.error ?? "Failed to send.");
+                throw new Error(body.error ?? t.form.failed);
             }
 
             setStatus("success");
             reset();
         } catch (err) {
             setStatus("error");
-            setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+            setErrorMsg(err instanceof Error ? err.message : t.form.error);
         }
     };
 
@@ -55,15 +57,15 @@ export default function ContactForm() {
             {/* Email */}
             <div className="flex flex-col gap-1.5">
                 <label className="font-body text-xs uppercase tracking-widest text-graphite">
-                    Your Email
+                    {t.form.email}
                 </label>
                 <input
                     type="email"
                     placeholder="you@example.com"
                     className={inputClass}
                     {...register("email", {
-                        required: "Email is required.",
-                        pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email address." },
+                        required: t.form.emailRequired,
+                        pattern: { value: /^\S+@\S+\.\S+$/, message: t.form.emailInvalid },
                     })}
                 />
                 {errors.email && (
@@ -74,13 +76,13 @@ export default function ContactForm() {
             {/* Subject */}
             <div className="flex flex-col gap-1.5">
                 <label className="font-body text-xs uppercase tracking-widest text-graphite">
-                    Subject
+                    {t.form.subject}
                 </label>
                 <input
                     type="text"
-                    placeholder="What's this about?"
+                    placeholder={t.form.subjectPlaceholder}
                     className={inputClass}
-                    {...register("subject", { required: "Subject is required." })}
+                    {...register("subject", { required: t.form.subjectRequired })}
                 />
                 {errors.subject && (
                     <p className="font-body text-[10px] text-red-500">{errors.subject.message}</p>
@@ -90,15 +92,15 @@ export default function ContactForm() {
             {/* Message */}
             <div className="flex flex-col gap-1.5">
                 <label className="font-body text-xs uppercase tracking-widest text-graphite">
-                    Message
+                    {t.form.message}
                 </label>
                 <textarea
                     rows={6}
-                    placeholder="Tell me something..."
+                    placeholder={t.form.messagePlaceholder}
                     className={`${inputClass} resize-none`}
                     {...register("message", {
-                        required: "Message is required.",
-                        minLength: { value: 10, message: "Message must be at least 10 characters." },
+                        required: t.form.messageRequired,
+                        minLength: { value: 10, message: t.form.messageMin },
                     })}
                 />
                 {errors.message && (
@@ -113,7 +115,7 @@ export default function ContactForm() {
                 className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-full border border-accent bg-accent px-8 py-3 font-mono text-sm uppercase tracking-widest text-white transition-all duration-200 hover:bg-accent/90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
             >
                 <Send size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-                {status === "loading" ? "Sending..." : "Send Message"}
+                {status === "loading" ? t.form.sending : t.form.submit}
             </button>
 
             {/* Feedback */}
@@ -121,7 +123,7 @@ export default function ContactForm() {
                 <div className="flex items-center gap-2 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3">
                     <CheckCircle size={15} className="shrink-0 text-green-500" />
                     <p className="font-body text-xs text-green-600 dark:text-green-400">
-                        Message sent! I&apos;ll get back to you soon.
+                        {t.form.success}
                     </p>
                 </div>
             )}

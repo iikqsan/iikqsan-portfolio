@@ -11,9 +11,9 @@
   --color-accent: #3D5AFE;
   --color-line: #E5E5E0;
 
-  --font-display: var(--font-fraunces);
-  --font-body: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-fraunces), var(--font-kanit);
+  --font-body: var(--font-inter), var(--font-kanit);
+  --font-mono: var(--font-jetbrains-mono), var(--font-kanit);
 }
 
 @layer base {
