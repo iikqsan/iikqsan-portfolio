@@ -32,75 +32,8 @@ const PROJECTS: Project[] = [
         },
         accent: "#3D5AFE",
         folder: "nrca-web",
-        images: ["01.png","02.png","03.png"],
-    },
-    {
-        label: "Frontend",
-        title: "CM Square",
-        description: {
-            en: "Re-design and Develop new UI using new stack",
-            th: "ออกแบบและพัฒนา UI ใหม่ด้วยเทคโนโลยีชุดใหม่",
-        },
-        accent: "#0C2F53",
-        folder: "cm-square",
         images: ["01.png"],
-    },
-    {
-        label: "Full-Stack",
-        title: "OTOD API Portal",
-        description: {
-            en: "Develop Backend API and Frontend UI for Provider testing Durian Project API",
-            th: "พัฒนา Backend API และ Frontend UI ให้ Provider ใช้ทดสอบ API ของโครงการทุเรียน",
-        },
-        accent: "#ffc107",
-        folder: "otod-api-portal",
-        images: ["01.png"],
-    },
-    {
-        label: "Frontend",
-        title: "OTOD Dashboard",
-        description: {
-            en: "Develop Frontend UI Dashboard for Provider Durian Project checking farmer stat",
-            th: "พัฒนา Dashboard ฝั่ง Frontend ให้ Provider โครงการทุเรียนใช้ตรวจสอบสถิติเกษตรกร",
-        },
-        accent: "#fff200",
-        folder: "otod-dashboard",
-        images: ["01.png"],
-    },
-    {
-        label: "Backend API",
-        title: "EdubroadCast",
-        description: {
-            en: "Develop Backend API for this website",
-            th: "พัฒนา Backend API ให้กับเว็บไซต์นี้",
-        },
-        accent: "#3840e4",
-        folder: "edubroadcast",
-        images: ["01.png"],
-    },
-    {
-        label: "Full-Stack",
-        title: "OpenAPI Sandbox",
-        description: {
-            en: "Develop Backend API and Frontend UI for Business partner try to connect they application to my application",
-            th: "พัฒนา Backend API และ Frontend UI ให้พาร์ทเนอร์ทางธุรกิจทดลองเชื่อมต่อแอปพลิเคชันของตนเข้ากับระบบ",
-        },
-        accent: "#1976d2",
-        folder: "open-api-sandbox",
-        images: ["01.png"],
-    },
-    {
-        label: "Backend API",
-        title: "Tatip AI Camera",
-        description: {
-            en: "Develop Backend API for this project",
-            th: "พัฒนา Backend API ให้กับโปรเจกต์นี้",
-        },
-        accent: "#181818",
-        accentDark: "#E5E5E5",
-        folder: "tatip-ai-camera",
-        images: ["01.png"],
-    },
+    }
 ];
 
 /** เวลาเปลี่ยนโปรเจกต์อัตโนมัติ (ms) — นับใหม่ทุกครั้งที่ผู้ใช้กดเลื่อน */

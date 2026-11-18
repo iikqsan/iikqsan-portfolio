@@ -15,8 +15,8 @@ const en = {
         toggleLang: "Switch language",
     },
     home: {
-        greeting: "Hi, I'm Prajak Udomsup",
-        role: "a Full-Stack Developer from Thailand.",
+        greeting: "Hi,",
+        role: "I'm a Full-Stack Developer from Thailand.",
         subtitle: "now I'm still working in Frontend Developer role, but I have Backend experience",
     },
     projects: {
@@ -40,7 +40,7 @@ const en = {
     resume: {
         heading: "My Resume",
         download: "Download",
-        meta: "PDF · Updated 2024",
+        meta: "PDF English Version · Updated 2024",
     },
     contact: {
         heading: "Contact",
@@ -74,15 +74,15 @@ const th: Dictionary = {
     nav: {
         home: "หน้าแรก",
         resume: "เรซูเม่",
-        contact: "ติดต่อ",
+        contact: "ติดต่อฉัน",
         toggleMenu: "เปิด/ปิดเมนู",
         toggleTheme: "สลับธีม",
         toggleLang: "เปลี่ยนภาษา",
     },
     home: {
-        greeting: "สวัสดี, ฉัน ประจักร อุดมทรัพย์ ",
-        role: "Full-Stack Developer จากประเทศไทย",
-        subtitle: "ปัจจุบันทำงานในตำแหน่ง Frontend Developer และมีประสบการณ์ด้าน Backend ด้วย",
+        greeting: "สวัสดี,",
+        role: "ฉันเป็น Full-Stack Developer จากประเทศไทย",
+        subtitle: "ปัจจุบันทำงานในตำแหน่ง Frontend Developer และมีประสบการณ์ด้าน Backend",
     },
     projects: {
         heading: "ผลงาน",
@@ -105,7 +105,7 @@ const th: Dictionary = {
     resume: {
         heading: "เรซูเม่",
         download: "ดาวน์โหลด",
-        meta: "PDF · อัปเดตปี 2024",
+        meta: "PDF English Version · อัปเดตล่าสุด 2024",
     },
     contact: {
         heading: "ติดต่อ",
